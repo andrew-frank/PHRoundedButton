@@ -13,6 +13,9 @@
 		FE91156E1C0481DF003F5FA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE91156C1C0481DF003F5FA8 /* Main.storyboard */; };
 		FE9115701C0481DF003F5FA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE91156F1C0481DF003F5FA8 /* Assets.xcassets */; };
 		FE9115731C0481DF003F5FA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE9115711C0481DF003F5FA8 /* LaunchScreen.storyboard */; };
+		FE91157D1C0483A0003F5FA8 /* PHRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FE91157C1C0483A0003F5FA8 /* PHRoundedButton.m */; settings = {ASSET_TAGS = (); }; };
+		FE9115E11C04A108003F5FA8 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9115DE1C04A108003F5FA8 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
+		FE9115E21C04A108003F5FA8 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE9115E01C04A108003F5FA8 /* UIImageView+LBBlurredImage.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		FE91156F1C0481DF003F5FA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE9115721C0481DF003F5FA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE9115741C0481DF003F5FA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE91157B1C0483A0003F5FA8 /* PHRoundedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHRoundedButton.h; path = Classes/PHRoundedButton.h; sourceTree = SOURCE_ROOT; };
+		FE91157C1C0483A0003F5FA8 /* PHRoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHRoundedButton.m; path = Classes/PHRoundedButton.m; sourceTree = SOURCE_ROOT; };
+		FE9115DD1C04A108003F5FA8 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		FE9115DE1C04A108003F5FA8 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		FE9115DF1C04A108003F5FA8 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		FE9115E01C04A108003F5FA8 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,8 @@
 		FE9115621C0481DF003F5FA8 /* PHRoundedButton */ = {
 			isa = PBXGroup;
 			children = (
+				FE9115DC1C04A0FA003F5FA8 /* Vendors */,
+				FE91157A1C04833E003F5FA8 /* PHRoundedButton */,
 				FE9115661C0481DF003F5FA8 /* AppDelegate.h */,
 				FE9115671C0481DF003F5FA8 /* AppDelegate.m */,
 				FE9115691C0481DF003F5FA8 /* ViewController.h */,
@@ -77,6 +88,26 @@
 				FE9115641C0481DF003F5FA8 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FE91157A1C04833E003F5FA8 /* PHRoundedButton */ = {
+			isa = PBXGroup;
+			children = (
+				FE91157B1C0483A0003F5FA8 /* PHRoundedButton.h */,
+				FE91157C1C0483A0003F5FA8 /* PHRoundedButton.m */,
+			);
+			name = PHRoundedButton;
+			sourceTree = "<group>";
+		};
+		FE9115DC1C04A0FA003F5FA8 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				FE9115DD1C04A108003F5FA8 /* UIImage+ImageEffects.h */,
+				FE9115DE1C04A108003F5FA8 /* UIImage+ImageEffects.m */,
+				FE9115DF1C04A108003F5FA8 /* UIImageView+LBBlurredImage.h */,
+				FE9115E01C04A108003F5FA8 /* UIImageView+LBBlurredImage.m */,
+			);
+			name = Vendors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE91156B1C0481DF003F5FA8 /* ViewController.m in Sources */,
+				FE9115E11C04A108003F5FA8 /* UIImage+ImageEffects.m in Sources */,
+				FE91157D1C0483A0003F5FA8 /* PHRoundedButton.m in Sources */,
+				FE9115E21C04A108003F5FA8 /* UIImageView+LBBlurredImage.m in Sources */,
 				FE9115681C0481DF003F5FA8 /* AppDelegate.m in Sources */,
 				FE9115651C0481DF003F5FA8 /* main.m in Sources */,
 			);
@@ -298,6 +332,7 @@
 				FE9115791C0481DF003F5FA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

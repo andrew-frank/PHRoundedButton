@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "PHRoundedButton.h"
+#import "UIImageView+LBBlurredImage.h"
 
 @interface ViewController ()
 
@@ -15,14 +17,102 @@
 @implementation ViewController
 
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    
+    NSDictionary *appearanceProxy1 = @{kPHRoundedButtonCornerRadius : @40,
+                                       kPHRoundedButtonBorderWidth  : @2,
+                                       kPHRoundedButtonBorderColor  : [[UIColor blackColor] colorWithAlphaComponent:0.6],
+                                       kPHRoundedButtonBorderAnimateToColor  : [UIColor clearColor],
+                                       kPHRoundedButtonContentColor : [UIColor blackColor],
+                                       kPHRoundedButtonContentAnimateToColor : [UIColor whiteColor],
+                                       kPHRoundedButtonForegroundColor : [[UIColor whiteColor] colorWithAlphaComponent:0.6],
+                                       kPHRoundedButtonForegroundAnimateToColor : [UIColor clearColor]};
+    
+    NSDictionary *appearanceProxy2 = @{kPHRoundedButtonCornerRadius : @25,
+                                       kPHRoundedButtonBorderWidth  : @1.5,
+                                       kPHRoundedButtonRestoreSelectedState : @NO,
+                                       kPHRoundedButtonBorderColor : [[UIColor blackColor] colorWithAlphaComponent:0.5],
+                                       kPHRoundedButtonBorderAnimateToColor : [UIColor whiteColor],
+                                       kPHRoundedButtonContentColor : [[UIColor blackColor] colorWithAlphaComponent:0.5],
+                                       kPHRoundedButtonContentAnimateToColor : [UIColor whiteColor],
+                                       kPHRoundedButtonForegroundColor : [[UIColor whiteColor] colorWithAlphaComponent:0.5]};
+    
+    NSDictionary *appearanceProxy3 = @{kPHRoundedButtonCornerRadius : @40,
+                                       kPHRoundedButtonBorderWidth  : @2,
+                                       kPHRoundedButtonRestoreSelectedState : @NO,
+                                       kPHRoundedButtonBorderColor : [UIColor clearColor],
+                                       kPHRoundedButtonBorderAnimateToColor : [UIColor whiteColor],
+                                       kPHRoundedButtonContentColor : [UIColor whiteColor],
+                                       kPHRoundedButtonContentAnimateToColor : [UIColor blackColor],
+                                       kPHRoundedButtonForegroundColor : [[UIColor blackColor] colorWithAlphaComponent:0.5],
+                                       kPHRoundedButtonForegroundAnimateToColor : [UIColor whiteColor]};
+    
+    [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy1 forIdentifier:@"1"];
+    [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy2 forIdentifier:@"2"];
+    [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy3 forIdentifier:@"3"];
+    
+    
+    /////////////////////////////////////////////////////////////////////////////
+    
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView setImageToBlur:[UIImage imageNamed:@"pic"] completionBlock:NULL];
+    [self.view addSubview:imageView];
+    
+    CGFloat backgroundViewHeight = ceilf(CGRectGetHeight([UIScreen mainScreen].bounds)/ 3.0);
+    CGFloat backgroundViewWidth = CGRectGetWidth(self.view.bounds);
+    
+    NSArray *buttonStyleArray = @[@(PHRoundedButtonSubtitle),
+                                  @(PHRoundedButtonCentralImage),
+                                  @(PHRoundedButtonCentralImage)];
+    
+    for (int i = 0; i < 3; i++) {
+        CGRect backgroundRect = CGRectMake(0, //x
+                                           backgroundViewHeight * i, //y
+                                           backgroundViewWidth,
+                                           backgroundViewHeight);
+        
+        /* MRHollowBackgroundView *backgroundView = [[MRHollowBackgroundView alloc] initWithFrame:backgroundRect];
+        backgroundView.foregroundColor =  foregroundColorArray[i];
+        [self.view addSubview:backgroundView]; */
+        
+        CGFloat buttonSize = i == 1 ? 50 : 50;
+        
+        CGRect buttonRect = CGRectMake((backgroundViewWidth - buttonSize) / 2.0,
+                                       (backgroundViewHeight - buttonSize) / 2.0 + backgroundRect.origin.y,
+                                       buttonSize,
+                                       buttonSize);
+        
+        PHRoundedButton *button = [[PHRoundedButton alloc] initWithFrame:buttonRect buttonStyle:[buttonStyleArray[i] integerValue]
+                                                  appearanceIdentifier:[NSString stringWithFormat:@"%d", i + 1]];
+        
+        button.backgroundColor = [UIColor clearColor];
+        
+        if (i == 0) {
+//            button.textLabel.text = @"7";
+//            button.textLabel.font = [UIFont boldSystemFontOfSize:50];
+            button.textLabel.text = @"A";
+            button.textLabel.font = [UIFont boldSystemFontOfSize:30];
+            button.detailTextLabel.text = @"Alternative";
+            button.detailTextLabel.font = [UIFont systemFontOfSize:10];
+            
+        } else {
+            button.imageView.image = [UIImage imageNamed:@"twitter"];
+            button.textLabel.text = @"A";
+            button.textLabel.font = [UIFont boldSystemFontOfSize:30];
+            button.detailTextLabel.text = @"Alternative";
+            button.detailTextLabel.font = [UIFont systemFontOfSize:10];
+        }
+        
+        [self.view addSubview:button];
+    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
