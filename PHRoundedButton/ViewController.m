@@ -70,7 +70,7 @@
     
     NSArray *buttonStyleArray = @[@(PHRoundedButtonSubtitle),
                                   @(PHRoundedButtonCentralImage),
-                                  @(PHRoundedButtonCentralImage)];
+                                  @(PHRoundedButtonImageWithTitle)];
     
     for (int i = 0; i < 3; i++) {
         CGRect backgroundRect = CGRectMake(0, //x
