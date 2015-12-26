@@ -66,9 +66,3 @@ extern NSString *const kPHRoundedButtonRestoreSelectedState;
 + (NSDictionary *)appearanceForIdentifier:(NSString *)identifier;
 
 @end
-
-//@interface MRHollowBackgroundView : UIView
-//
-//@property (nonatomic, strong)   UIColor *foregroundColor;
-//
-//@end

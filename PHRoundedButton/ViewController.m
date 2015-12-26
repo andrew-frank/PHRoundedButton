@@ -79,10 +79,6 @@
                                            backgroundViewWidth,
                                            backgroundViewHeight);
         
-        /* MRHollowBackgroundView *backgroundView = [[MRHollowBackgroundView alloc] initWithFrame:backgroundRect];
-        backgroundView.foregroundColor =  foregroundColorArray[i];
-        [self.view addSubview:backgroundView]; */
-        
         CGFloat buttonSize = i == 1 ? 50 : 100;
         
         CGRect buttonRect = CGRectMake((backgroundViewWidth - buttonSize) / 2.0,

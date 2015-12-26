@@ -71,25 +71,9 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 
 @interface MRImageLayer : UIView
 @property (nonatomic, strong) UIImageView *imageView;
-//@property (nonatomic, assign) BOOL backgroundMode;
 @end
 
 @implementation MRImageLayer
-
-//-(instancetype)initWithFrame:(CGRect)frame backgroundMode:(BOOL)background
-//{
-//    self = [super initWithFrame:frame];
-//    if (self)
-//    {
-//        _backgroundMode = background;
-//        self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-//        self.imageView.contentMode = self.backgroundMode ? UIViewContentModeScaleAspectFill : UIViewContentModeScaleAspectFit;
-////        self.imageView.backgroundColor = [UIColor clearColor];
-////        self.layer.mask = self.imageView.layer;
-//    }
-//    
-//    return self;
-//}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -312,7 +296,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     self.textLayer.backgroundColor = contentColor;
     self.detailTextLayer.backgroundColor = contentColor;
     self.imageLayer.backgroundColor = contentColor;
-    //self.backgroundImageLayer.backgroundColor = contentColor;
 }
 
 - (void)setForegroundColor:(UIColor *)foregroundColor
@@ -361,7 +344,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
             self.textLayer.backgroundColor = self.contentAnimateToColor;
             self.detailTextLayer.backgroundColor = self.contentAnimateToColor;
             self.imageLayer.backgroundColor = self.contentAnimateToColor;
-            //self.backgroundImageLayer.backgroundColor = self.contentAnimateToColor;
         }
         
         if (self.borderAnimateToColor && self.foregroundAnimateToColor && self.borderAnimateToColor == self.foregroundAnimateToColor) {
@@ -385,7 +367,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         self.textLayer.backgroundColor = self.contentColor;
         self.detailTextLayer.backgroundColor = self.contentColor;
         self.imageLayer.backgroundColor = self.contentColor;
-        //self.backgroundImageLayer.backgroundColor = self.contentColor;
 
         if (self.borderAnimateToColor && self.foregroundAnimateToColor && self.borderAnimateToColor == self.foregroundAnimateToColor) {
             self.foregroundView.backgroundColor = self.foregroundColor;
@@ -517,77 +498,3 @@ NSString *const kPHRoundedButtonRestoreSelectedState         = @"restoreSelected
 
 
 @end
-
-
-
-/*
- 
-/////////////////////////////////////
-#pragma mark - MRHollowBackgroundView
-
-@implementation MRHollowBackgroundView
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.opaque = NO;
-        self.backgroundColor = [UIColor clearColor];
-    }
-    
-    return self;
-}
-
-- (void)setForegroundColor:(UIColor *)foregroundColor
-{
-    if (_foregroundColor == foregroundColor)
-        return;
-    
-    _foregroundColor = foregroundColor;
-    [self setNeedsDisplay];
-}
-
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self setNeedsDisplay];
-}
-
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    [self.foregroundColor setFill];
-    
-    if (self.layer.masksToBounds){
-        UIBezierPath *rectPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius];
-        CGContextAddPath(context, rectPath.CGPath);
-        
-    } else {
-        UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:rect];
-        CGContextAddPath(context, rectPath.CGPath);
-    }
-    
-    [self.subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
-        if (view.layer.masksToBounds) {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:view.frame cornerRadius:view.layer.cornerRadius];
-            CGContextAddPath(context, path.CGPath);
-        
-        } else {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRect:view.frame];
-            CGContextAddPath(context, path.CGPath);
-        }
-    }];
-    
-    CGContextEOFillPath(context);
-    CGContextSetAllowsAntialiasing(context, YES);
-    CGContextSetShouldAntialias(context, YES);
-    CGContextRestoreGState(context);
-}
-
-@end
- 
-*/
