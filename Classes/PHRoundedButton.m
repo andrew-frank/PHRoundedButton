@@ -127,7 +127,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 @property (nonatomic, strong) MRTextLayer *detailTextLayer;
 @property (nonatomic, strong) MRImageLayer *imageLayer;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
-//@property (nonatomic, strong) MRImageLayer *backgroundImageLayer;
 
 @end
 
@@ -167,12 +166,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         self.imageLayer = [[MRImageLayer alloc] initWithFrame:CGRectNull];
         self.imageLayer.backgroundColor = self.contentColor;
         [self insertSubview:self.imageLayer aboveSubview:self.foregroundView];
-        
-        /*
-//        self.backgroundImageLayer = [[MRImageLayer alloc] initWithFrame:CGRectNull backgroundMode:YES];
-//        self.backgroundImageLayer.backgroundColor = self.contentColor;
-        [self insertSubview:self.backgroundImageLayer belowSubview:self.foregroundView];
-        */
         
         self.backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectNull];
         self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -220,11 +213,13 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     self.foregroundView.frame = CGRectMake(layoutBorderWidth, layoutBorderWidth, CGRectGetWidth(self.bounds) - layoutBorderWidth * 2, CGRectGetHeight(self.bounds) - layoutBorderWidth * 2);
     
     self.foregroundView.layer.cornerRadius = cornerRadius - borderWidth;
+    
+    self.backgroundImageView.frame = CGRectMake(layoutBorderWidth, layoutBorderWidth, CGRectGetWidth(self.bounds) - layoutBorderWidth * 2, CGRectGetHeight(self.bounds) - layoutBorderWidth * 2);;
+
 
     switch (self.mr_buttonStyle) {
         case PHRoundedButtonDefault: {
             self.imageLayer.frame = CGRectNull;
-            self.backgroundImageView.frame = CGRectNull;
             self.detailTextLayer.frame = CGRectNull;
             self.textLayer.frame = [self boxingRect];
             break;
@@ -232,7 +227,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
             
         case PHRoundedButtonSubtitle: {
             self.imageLayer.frame = CGRectNull;
-            self.backgroundImageView.frame = CGRectNull;
             CGRect boxRect = [self boxingRect];
             self.textLayer.frame = CGRectMake(boxRect.origin.x,
                                               boxRect.origin.y,
@@ -248,25 +242,15 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         case PHRoundedButtonCentralImage: {
             self.textLayer.frame = CGRectNull;
             self.detailTextLayer.frame = CGRectNull;
-            self.backgroundImageView.frame = CGRectNull;
-
             self.imageLayer.frame = [self boxingRect];
             break;
         }
             
-        case PHRoundedButtonBackgroundImage: {
-            self.detailTextLayer.frame = CGRectNull;
-            self.textLayer.frame = CGRectNull;
-            CGRect frame = [self boxingRect];
-            self.textLayer.frame = frame;
-            self.backgroundImageView.frame = CGRectMake(layoutBorderWidth, layoutBorderWidth, CGRectGetWidth(self.bounds) - layoutBorderWidth * 2, CGRectGetHeight(self.bounds) - layoutBorderWidth * 2);;
-            break;
-        }
+        case PHRoundedButtonImageWithSubtitle:
             
         default: {
             CGRect boxRect = [self boxingRect];
             self.textLayer.frame = CGRectNull;
-            self.backgroundImageView.frame = CGRectNull;
             self.imageLayer.frame = CGRectMake(boxRect.origin.x,
                                                boxRect.origin.y,
                                                CGRectGetWidth(boxRect),

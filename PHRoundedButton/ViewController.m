@@ -70,12 +70,12 @@
     CGFloat backgroundViewWidth = CGRectGetWidth(self.view.bounds);
     
     NSArray *buttonStyleArray = @[@(PHRoundedButtonSubtitle),
-                                  @(PHRoundedButtonBackgroundImage), //PHRoundedButtonBackgroundImage / PHRoundedButtonCentralImage
-                                  @(PHRoundedButtonBackgroundImage)];
+                                  @(PHRoundedButtonCentralImage),
+                                  @(PHRoundedButtonDefault)];
     
     for (int i = 0; i < 3; i++) {
-        CGRect backgroundRect = CGRectMake(0, //x
-                                           backgroundViewHeight * i, //y
+        CGRect backgroundRect = CGRectMake(0,
+                                           backgroundViewHeight * i,
                                            backgroundViewWidth,
                                            backgroundViewHeight);
         
@@ -96,14 +96,14 @@
         button.backgroundColor = [UIColor clearColor];
         
         if (i == 0) {
+            button.backgroundImageView.image = [UIImage imageNamed:@"pic"];
             button.textLabel.text = @"A";
             button.textLabel.font = [UIFont boldSystemFontOfSize:50];
             button.detailTextLabel.text = @"Alternative";
             button.detailTextLabel.font = [UIFont systemFontOfSize:10];
             
         } else if(i == 1) {
-            UIImage *image = [UIImage imageNamed:@"pic"];
-            button.backgroundImageView.image = image;
+            button.backgroundImageView.image = [UIImage imageNamed:@"pic"];
             button.imageView.image = [UIImage imageNamed:@"twitter"];
             button.textLabel.text = @"A";
             button.textLabel.font = [UIFont boldSystemFontOfSize:30];
@@ -111,8 +111,7 @@
             button.detailTextLabel.font = [UIFont systemFontOfSize:10];
             
         }  else if(i == 2) {
-            UIImage *image = [UIImage imageNamed:@"pic"];
-            button.backgroundImageView.image = image;
+            button.backgroundImageView.image = [UIImage imageNamed:@"pic"];
             button.textLabel.text = @"A";
             button.textLabel.font = [UIFont boldSystemFontOfSize:30];
         }

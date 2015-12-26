@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger, PHRoundedButtonStyle) {
     PHRoundedButtonDefault,
     PHRoundedButtonSubtitle,
     PHRoundedButtonCentralImage,
-    PHRoundedButtonBackgroundImage
+    PHRoundedButtonImageWithSubtitle
 };
 
 extern CGFloat const PHRoundedButtonMaxValue;
