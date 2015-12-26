@@ -113,8 +113,18 @@
         }
 
         [self.view addSubview:button];
+        
+        /*
+        //Changing appearanceIdentifier:
+        if (i == 0) {
+            [button setAppearanceIdentifier:@"1"]; //1
+        } else if(i == 1) {
+            [button setAppearanceIdentifier:@"3"]; //2
+        }  else if(i == 2) {
+            [button setAppearanceIdentifier:@"2"]; //3
+        }
+        */
     }
-    
 }
 
 

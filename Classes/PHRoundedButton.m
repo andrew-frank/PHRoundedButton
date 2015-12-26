@@ -125,7 +125,7 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     if (self) {
         self.layer.masksToBounds = YES;
         
-        _mr_buttonStyle = style;
+        _ph_buttonStyle = style;
         _contentColor = self.tintColor;
         _foregroundColor = [UIColor whiteColor];
         _restoreSelectedState = YES;
@@ -201,7 +201,7 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     self.backgroundImageView.frame = CGRectMake(layoutBorderWidth, layoutBorderWidth, CGRectGetWidth(self.bounds) - layoutBorderWidth * 2, CGRectGetHeight(self.bounds) - layoutBorderWidth * 2);;
 
 
-    switch (self.mr_buttonStyle) {
+    switch (self.ph_buttonStyle) {
         case PHRoundedButtonDefault: {
             self.imageLayer.frame = CGRectNull;
             self.detailTextLayer.frame = CGRectNull;
@@ -250,6 +250,11 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 
 
 #pragma mark - Appearance
+
+- (void)setAppearanceIdentifier:(NSString *)identifier
+{
+    [self applyAppearanceForIdentifier:identifier];
+}
 
 - (void)applyAppearanceForIdentifier:(NSString *)identifier
 {

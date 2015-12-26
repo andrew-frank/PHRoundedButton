@@ -19,7 +19,7 @@ extern CGFloat const PHRoundedButtonMaxValue;
 
 @interface PHRoundedButton : UIControl
 
-@property (readonly, nonatomic) PHRoundedButtonStyle         mr_buttonStyle;
+@property (readonly, nonatomic) PHRoundedButtonStyle        ph_buttonStyle;
 @property (nonatomic, assign)   CGFloat                     cornerRadius;               //UI_APPEARANCE_SELECTOR
 @property (nonatomic, assign)   CGFloat                     borderWidth;                //UI_APPEARANCE_SELECTOR
 @property (nonatomic, strong)   UIColor                     *borderColor;               //UI_APPEARANCE_SELECTOR
@@ -37,14 +37,11 @@ extern CGFloat const PHRoundedButtonMaxValue;
 
 @property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
 
-+ (instancetype)buttonWithFrame:(CGRect)frame
-                    buttonStyle:(PHRoundedButtonStyle)style
-           appearanceIdentifier:(NSString *)identifier;
-- (instancetype)initWithFrame:(CGRect)frame
-                  buttonStyle:(PHRoundedButtonStyle)style;
-- (instancetype)initWithFrame:(CGRect)frame
-                  buttonStyle:(PHRoundedButtonStyle)style
-         appearanceIdentifier:(NSString *)identifier;
++ (instancetype)buttonWithFrame:(CGRect)frame buttonStyle:(PHRoundedButtonStyle)style appearanceIdentifier:(NSString *)identifier;
+- (instancetype)initWithFrame:(CGRect)frame buttonStyle:(PHRoundedButtonStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame buttonStyle:(PHRoundedButtonStyle)style appearanceIdentifier:(NSString *)identifier;
+
+- (void)setAppearanceIdentifier:(NSString *)identifier;
 
 @end
 
