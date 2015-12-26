@@ -23,8 +23,7 @@
     [super viewDidLoad];
     
     
-    
-    NSDictionary *appearanceProxy1 = @{kPHRoundedButtonCornerRadius : @40,
+    NSDictionary *appearanceProxy1 = @{kPHRoundedButtonCornerRadius : @50,
                                        kPHRoundedButtonBorderWidth  : @2,
                                        kPHRoundedButtonBorderColor  : [[UIColor blackColor] colorWithAlphaComponent:0.6],
                                        kPHRoundedButtonBorderAnimateToColor  : [UIColor clearColor],
@@ -42,15 +41,17 @@
                                        kPHRoundedButtonContentAnimateToColor : [UIColor whiteColor],
                                        kPHRoundedButtonForegroundColor : [[UIColor whiteColor] colorWithAlphaComponent:0.5]};
     
-    NSDictionary *appearanceProxy3 = @{kPHRoundedButtonCornerRadius : @40,
+    NSDictionary *appearanceProxy3 = @{
+                                       kPHRoundedButtonCornerRadius : @50,
                                        kPHRoundedButtonBorderWidth  : @2,
                                        kPHRoundedButtonRestoreSelectedState : @NO,
-                                       kPHRoundedButtonBorderColor : [UIColor clearColor],
-                                       kPHRoundedButtonBorderAnimateToColor : [UIColor whiteColor],
-                                       kPHRoundedButtonContentColor : [UIColor whiteColor],
-                                       kPHRoundedButtonContentAnimateToColor : [UIColor blackColor],
+                                       kPHRoundedButtonBorderColor : [UIColor grayColor],
+                                       kPHRoundedButtonBorderAnimateToColor : [UIColor darkGrayColor],
+                                       kPHRoundedButtonContentColor : [UIColor orangeColor],
+                                       kPHRoundedButtonContentAnimateToColor : [UIColor redColor],
                                        kPHRoundedButtonForegroundColor : [[UIColor blackColor] colorWithAlphaComponent:0.5],
-                                       kPHRoundedButtonForegroundAnimateToColor : [UIColor whiteColor]};
+                                       kPHRoundedButtonForegroundAnimateToColor : [[UIColor whiteColor] colorWithAlphaComponent:0.8]
+                                       };
     
     [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy1 forIdentifier:@"1"];
     [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy2 forIdentifier:@"2"];
@@ -69,8 +70,8 @@
     CGFloat backgroundViewWidth = CGRectGetWidth(self.view.bounds);
     
     NSArray *buttonStyleArray = @[@(PHRoundedButtonSubtitle),
-                                  @(PHRoundedButtonCentralImage),
-                                  @(PHRoundedButtonImageWithTitle)];
+                                  @(PHRoundedButtonBackgroundImage), //PHRoundedButtonBackgroundImage / PHRoundedButtonCentralImage
+                                  @(PHRoundedButtonBackgroundImage)];
     
     for (int i = 0; i < 3; i++) {
         CGRect backgroundRect = CGRectMake(0, //x
@@ -82,7 +83,7 @@
         backgroundView.foregroundColor =  foregroundColorArray[i];
         [self.view addSubview:backgroundView]; */
         
-        CGFloat buttonSize = i == 1 ? 50 : 50;
+        CGFloat buttonSize = i == 1 ? 50 : 100;
         
         CGRect buttonRect = CGRectMake((backgroundViewWidth - buttonSize) / 2.0,
                                        (backgroundViewHeight - buttonSize) / 2.0 + backgroundRect.origin.y,
@@ -95,23 +96,30 @@
         button.backgroundColor = [UIColor clearColor];
         
         if (i == 0) {
-//            button.textLabel.text = @"7";
-//            button.textLabel.font = [UIFont boldSystemFontOfSize:50];
             button.textLabel.text = @"A";
-            button.textLabel.font = [UIFont boldSystemFontOfSize:30];
+            button.textLabel.font = [UIFont boldSystemFontOfSize:50];
             button.detailTextLabel.text = @"Alternative";
             button.detailTextLabel.font = [UIFont systemFontOfSize:10];
             
-        } else {
+        } else if(i == 1) {
+            UIImage *image = [UIImage imageNamed:@"pic"];
+            button.backgroundImageView.image = image;
             button.imageView.image = [UIImage imageNamed:@"twitter"];
             button.textLabel.text = @"A";
             button.textLabel.font = [UIFont boldSystemFontOfSize:30];
             button.detailTextLabel.text = @"Alternative";
             button.detailTextLabel.font = [UIFont systemFontOfSize:10];
+            
+        }  else if(i == 2) {
+            UIImage *image = [UIImage imageNamed:@"pic"];
+            button.backgroundImageView.image = image;
+            button.textLabel.text = @"A";
+            button.textLabel.font = [UIFont boldSystemFontOfSize:30];
         }
-        
+
         [self.view addSubview:button];
     }
+    
 }
 
 

@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger, PHRoundedButtonStyle) {
     PHRoundedButtonDefault,
     PHRoundedButtonSubtitle,
     PHRoundedButtonCentralImage,
-    PHRoundedButtonImageWithTitle
+    PHRoundedButtonBackgroundImage
 };
 
 extern CGFloat const PHRoundedButtonMaxValue;
@@ -35,10 +35,7 @@ extern CGFloat const PHRoundedButtonMaxValue;
 @property (nonatomic, weak)     UIImageView                 *imageView;
 @property (nonatomic, assign)   UIEdgeInsets                contentEdgeInsets;
 
-/////
-//new - do this with layer aswell
-@property (nonatomic, weak) UIImageView *backgroundImageView;
-/////
+@property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
 
 + (instancetype)buttonWithFrame:(CGRect)frame
                     buttonStyle:(PHRoundedButtonStyle)style
