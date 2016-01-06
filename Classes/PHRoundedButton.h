@@ -43,6 +43,7 @@ extern CGFloat const PHRoundedButtonMaxValue;
 - (instancetype)initWithFrame:(CGRect)frame buttonStyle:(PHRoundedButtonStyle)style appearanceIdentifier:(NSString *)identifier;
 
 - (void)setAppearanceIdentifier:(NSString *)identifier;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
 @end
 

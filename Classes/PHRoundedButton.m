@@ -337,19 +337,51 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     }];
 }
 
-- (void)setSelected:(BOOL)selected
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected];
+    
     if (selected)
-        [self fadeInAnimation];
+        [self fadeInAnimated:animated];
     else
-        [self fadeOutAnimation];
+        [self fadeOutAnimated:animated];
 }
 
-#pragma mark - Fade animation
-- (void)fadeInAnimation
+- (void)setSelected:(BOOL)selected
 {
-    [UIView animateWithDuration:self.animationDuration animations:^{
+    [self setSelected:selected animated:YES];
+}
+
+
+#pragma mark - Fade animation
+
+
+- (void)fadeInAnimated:(BOOL)animated
+{
+    if(animated) {
+        [UIView animateWithDuration:self.animationDuration animations:^{
+            if (self.contentAnimateToColor) {
+                self.textLayer.backgroundColor = self.contentAnimateToColor;
+                self.detailTextLayer.backgroundColor = self.contentAnimateToColor;
+                self.imageLayer.backgroundColor = self.contentAnimateToColor;
+            }
+            
+            if (self.borderAnimateToColor && self.foregroundAnimateToColor && self.borderAnimateToColor == self.foregroundAnimateToColor) {
+                self.backgroundColorCache = self.backgroundColor;
+                self.foregroundView.backgroundColor = [UIColor clearColor];
+                self.backgroundColor = self.borderAnimateToColor;
+                return;
+            }
+            
+            if (self.borderAnimateToColor)
+                self.layer.borderColor = self.borderAnimateToColor.CGColor;
+            
+            if (self.foregroundAnimateToColor)
+                self.foregroundView.backgroundColor = self.foregroundAnimateToColor;
+        }];
+        
+    } else {
         if (self.contentAnimateToColor) {
             self.textLayer.backgroundColor = self.contentAnimateToColor;
             self.detailTextLayer.backgroundColor = self.contentAnimateToColor;
@@ -368,12 +400,29 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         
         if (self.foregroundAnimateToColor)
             self.foregroundView.backgroundColor = self.foregroundAnimateToColor;
-    }];
+    }
 }
 
-- (void)fadeOutAnimation
+- (void)fadeOutAnimated:(BOOL)animated
 {
-    [UIView animateWithDuration:self.animationDuration animations:^{
+    if(animated) {
+        [UIView animateWithDuration:self.animationDuration animations:^{
+            self.textLayer.backgroundColor = self.contentColor;
+            self.detailTextLayer.backgroundColor = self.contentColor;
+            self.imageLayer.backgroundColor = self.contentColor;
+            
+            if (self.borderAnimateToColor && self.foregroundAnimateToColor && self.borderAnimateToColor == self.foregroundAnimateToColor) {
+                self.foregroundView.backgroundColor = self.foregroundColor;
+                self.backgroundColor = self.backgroundColorCache;
+                self.backgroundColorCache = nil;
+                return;
+            }
+            
+            self.foregroundView.backgroundColor = self.foregroundColor;
+            self.layer.borderColor = self.borderColor.CGColor;
+        }];
+        
+    } else {
         self.textLayer.backgroundColor = self.contentColor;
         self.detailTextLayer.backgroundColor = self.contentColor;
         self.imageLayer.backgroundColor = self.contentColor;
@@ -387,18 +436,10 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         
         self.foregroundView.backgroundColor = self.foregroundColor;
         self.layer.borderColor = self.borderColor.CGColor;
-    }];
+    }
 }
 
 #pragma mark - Touchs
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-//{
-//    UIView *touchView = [super hitTest:point withEvent:event];
-//    if ([self pointInside:point withEvent:event])
-//        return self;
-//    
-//    return touchView;
-//}
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
