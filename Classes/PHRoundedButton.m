@@ -97,7 +97,6 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 
 @end
 
-
 //////////////////////////////
 #pragma mark - PHRoundedButton
 
@@ -133,6 +132,7 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         _cornerRadius = 0.0;
         _borderWidth = 0.0;
         _contentEdgeInsets = UIEdgeInsetsZero;
+        _animationDuration = 0.15;
         
         self.foregroundView = [[UIView alloc] initWithFrame:CGRectNull];
         self.foregroundView.backgroundColor = self.foregroundColor;
@@ -154,6 +154,11 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
         self.backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectNull];
         self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self insertSubview:self.backgroundImageView belowSubview:self.foregroundView];
+        
+        self.foregroundView.userInteractionEnabled = NO;
+        self.textLayer.userInteractionEnabled = NO;
+        self.imageLayer.userInteractionEnabled = NO;
+        self.backgroundImageView.userInteractionEnabled = NO;
         
         [self applyAppearanceForIdentifier:identifier];
     }
@@ -199,8 +204,8 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
     self.foregroundView.layer.cornerRadius = cornerRadius - borderWidth;
     
     self.backgroundImageView.frame = CGRectMake(layoutBorderWidth, layoutBorderWidth, CGRectGetWidth(self.bounds) - layoutBorderWidth * 2, CGRectGetHeight(self.bounds) - layoutBorderWidth * 2);;
-
-
+    
+    
     switch (self.ph_buttonStyle) {
         case PHRoundedButtonDefault: {
             self.imageLayer.frame = CGRectNull;
@@ -327,7 +332,7 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 - (void)setEnabled:(BOOL)enabled
 {
     [super setEnabled:enabled];
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:self.animationDuration animations:^{
         self.foregroundView.alpha = enabled ? 1.0 : 0.5;
     }];
 }
@@ -344,7 +349,7 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 #pragma mark - Fade animation
 - (void)fadeInAnimation
 {
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:self.animationDuration animations:^{
         if (self.contentAnimateToColor) {
             self.textLayer.backgroundColor = self.contentAnimateToColor;
             self.detailTextLayer.backgroundColor = self.contentAnimateToColor;
@@ -368,11 +373,11 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 
 - (void)fadeOutAnimation
 {
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:self.animationDuration animations:^{
         self.textLayer.backgroundColor = self.contentColor;
         self.detailTextLayer.backgroundColor = self.contentColor;
         self.imageLayer.backgroundColor = self.contentColor;
-
+        
         if (self.borderAnimateToColor && self.foregroundAnimateToColor && self.borderAnimateToColor == self.foregroundAnimateToColor) {
             self.foregroundView.backgroundColor = self.foregroundColor;
             self.backgroundColor = self.backgroundColorCache;
@@ -386,14 +391,14 @@ static CGRect CGRectEdgeInset(CGRect rect, UIEdgeInsets insets)
 }
 
 #pragma mark - Touchs
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    UIView *touchView = [super hitTest:point withEvent:event];
-    if ([self pointInside:point withEvent:event])
-        return self;
-    
-    return touchView;
-}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+//{
+//    UIView *touchView = [super hitTest:point withEvent:event];
+//    if ([self pointInside:point withEvent:event])
+//        return self;
+//    
+//    return touchView;
+//}
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -449,6 +454,7 @@ NSString *const kPHRoundedButtonContentAnimateToColor        = @"contentAnimateT
 NSString *const kPHRoundedButtonForegroundColor              = @"foregroundColor";
 NSString *const kPHRoundedButtonForegroundAnimateToColor     = @"foregroundAnimateToColor";
 NSString *const kPHRoundedButtonRestoreSelectedState         = @"restoreSelectedState";
+NSString *const kPHRoundedButtonAnimationDuration            = @"animationDuration";
 
 
 @interface PHRoundedButtonAppearanceManager ()

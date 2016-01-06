@@ -34,6 +34,7 @@ extern CGFloat const PHRoundedButtonMaxValue;
 @property (nonatomic, weak)     UILabel                     *detailTextLabel;
 @property (nonatomic, weak)     UIImageView                 *imageView;
 @property (nonatomic, assign)   UIEdgeInsets                contentEdgeInsets;
+@property (nonatomic, assign)   CGFloat                     animationDuration;
 
 @property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
 
@@ -55,6 +56,7 @@ extern NSString *const kPHRoundedButtonBorderAnimateToColor;
 extern NSString *const kPHRoundedButtonContentAnimateToColor;
 extern NSString *const kPHRoundedButtonForegroundAnimateToColor;
 extern NSString *const kPHRoundedButtonRestoreSelectedState;
+extern NSString *const kPHRoundedButtonAnimationDuration;
 
 @interface PHRoundedButtonAppearanceManager : NSObject
 

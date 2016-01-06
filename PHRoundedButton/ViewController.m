@@ -50,7 +50,8 @@
                                        kPHRoundedButtonContentColor : [UIColor orangeColor],
                                        kPHRoundedButtonContentAnimateToColor : [UIColor redColor],
                                        kPHRoundedButtonForegroundColor : [[UIColor blackColor] colorWithAlphaComponent:0.5],
-                                       kPHRoundedButtonForegroundAnimateToColor : [[UIColor whiteColor] colorWithAlphaComponent:0.8]
+                                       kPHRoundedButtonForegroundAnimateToColor : [[UIColor whiteColor] colorWithAlphaComponent:0.8],
+                                       kPHRoundedButtonAnimationDuration : @0.15
                                        };
     
     [PHRoundedButtonAppearanceManager registerAppearanceProxy:appearanceProxy1 forIdentifier:@"1"];
